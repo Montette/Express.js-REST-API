@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 });
 
 router.route('/contacts')
-    .get(contactController.index)
+    .get(contactController.get)
     .post(contactController.new);
 
 router.route('/contact/:contact_id')

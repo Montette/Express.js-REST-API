@@ -23,8 +23,4 @@ const contactSchema = new Schema({
 
 
 
-const Contact = module.exports = mongoose.model('contact', contactSchema);
-
-module.exports.get = function (callback, limit) { //custom method of Contact model. Find() is an API method, which get for arguments, one of them is the callback in which we have access to error object and retreiving data
-    Contact.find(callback).limit(limit);
-}
+ module.exports = mongoose.model('contact', contactSchema);

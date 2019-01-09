@@ -1,8 +1,11 @@
 const Contact = require('../models/contactModel');
 
-exports.index =  (req, res) => {
-    Contact.get((error, data) => {
-        if(error) {
+exports.get = (req, res) => {
+    const limit = req.query.limit ? Number(req.query.limit) : 0;
+
+    Contact.find((error, data) => {
+
+        if (error) {
             res.json({
                 status: 'error',
                 message: 'Something went wrong'
@@ -14,20 +17,20 @@ exports.index =  (req, res) => {
             data
         });
 
-    })
+    }).limit(limit);
 };
 
-exports.new =  (req, res) => {
+exports.new = (req, res) => {
     const contact = new Contact({
         name: req.body.name,
         surname: req.body.surname,
         email: req.body.email,
         gender: req.body.gender,
         phone: req.body.phone
-    }); 
+    });
 
     contact.save((error) => {
-        if(error) {
+        if (error) {
             res.json({
                 status: 'error',
                 message: 'Something went wrong'
@@ -59,7 +62,7 @@ exports.view = (req, res) => {
 };
 
 exports.update = (req, res) => {
-    
+
     Contact.findById(req.params.contact_id, (error, contact) => {
 
         if (error) {
@@ -90,14 +93,16 @@ exports.update = (req, res) => {
                 data: contact
             })
         })
-      
+
     })
 };
 
 exports.remove = (req, res) => {
-    Contact.remove({ _id: req.params.contact_id}, (error, contact) => {
-            
-        if(error) res.send(error);
+    Contact.remove({
+        _id: req.params.contact_id
+    }, (error, contact) => {
+
+        if (error) res.send(error);
 
         res.json({
             status: 'success',
@@ -106,4 +111,3 @@ exports.remove = (req, res) => {
 
     });
 }
-
