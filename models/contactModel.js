@@ -16,11 +16,12 @@ const contactSchema = new Schema({
     },
     gender: String,
     phone: String,
-    create_date: {
-        type: Date,
-        default: Date.now
-    }
+},
+{
+    timestamps: true
 });
+
+
 
 const Contact = module.exports = mongoose.model('contact', contactSchema);
 

@@ -20,7 +20,7 @@ exports.index =  (req, res) => {
 exports.new =  (req, res) => {
     const contact = new Contact({
         name: req.body.name,
-        surname: req.nody.surname,
+        surname: req.body.surname,
         email: req.body.email,
         gender: req.body.gender,
         phone: req.body.phone
@@ -35,7 +35,7 @@ exports.new =  (req, res) => {
         };
         res.json({
             status: 'success',
-            message: 'contact savesd susscesfully',
+            message: 'contact saved susscesfully',
             data: contact
         });
     })

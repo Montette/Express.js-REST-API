@@ -20,8 +20,6 @@ app.use('/api', apiRoutes);
 
 
 
-
-
 const port = process.env.PORT || 8080;
 
 app.listen(port, () => {
