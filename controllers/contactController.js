@@ -72,11 +72,15 @@ exports.update = (req, res) => {
             })
         };
 
-        contact.name = req.body.name;
-        contact.surname = req.body.surname;
-        contact.email = req.body.email;
-        contact.gender = req.body.gender;
-        contact.phone = req.body.phone;
+
+        if (req.body._id) {
+            delete req.body._id;
+        }
+        for (let b in req.body) {
+            if (contact[b]) {
+                contact[b] = req.body[b];
+            }
+        }
 
         contact.save((error) => {
 
