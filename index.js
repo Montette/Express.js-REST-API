@@ -16,7 +16,7 @@ mongoose.connect('mongodb://Monika:test123@ds253104.mlab.com:53104/contacts-rest
 const db = mongoose.connection;
 
 app.get('/', (req, res) => res.send('Hello World'));
-app.use('/test', apiRoutes);
+app.use('/api', apiRoutes);
 
 
 

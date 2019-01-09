@@ -56,5 +56,54 @@ exports.view = (req, res) => {
             data: contact
         })
     })
+};
+
+exports.update = (req, res) => {
+    
+    Contact.findById(req.params.contact_id, (error, contact) => {
+
+        if (error) {
+            res.json({
+                status: 'error',
+                message: 'Cannot find contact with this id in database'
+            })
+        };
+
+        contact.name = req.body.name;
+        contact.surname = req.body.surname;
+        contact.email = req.body.email;
+        contact.gender = req.body.gender;
+        contact.phone = req.body.phone;
+
+        contact.save((error) => {
+
+            if (error) {
+                res.json({
+                    status: 'error',
+                    message: 'Cannot update this contact'
+                })
+            };
+
+            res.json({
+                status: 'success',
+                message: 'contact updated succesfully',
+                data: contact
+            })
+        })
+      
+    })
+};
+
+exports.remove = (req, res) => {
+    Contact.remove({ _id: req.params.contact_id}, (error, contact) => {
+            
+        if(error) res.send(error);
+
+        res.json({
+            status: 'success',
+            message: 'succesfully deleted contact'
+        });
+
+    });
 }
 
