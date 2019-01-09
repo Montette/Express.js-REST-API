@@ -16,6 +16,13 @@ const contactSchema = new Schema({
     },
     gender: String,
     phone: String,
+    // pets: [
+    //     {
+    //         species: String,
+    //         name: String,
+    //         age: String
+    //     }
+    // ]
 },
 {
     timestamps: true
