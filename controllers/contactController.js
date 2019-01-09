@@ -26,7 +26,8 @@ exports.new = (req, res) => {
         surname: req.body.surname,
         email: req.body.email,
         gender: req.body.gender,
-        phone: req.body.phone
+        phone: req.body.phone,
+        // pets: req.body.pets
     });
 
     contact.save((error) => {
