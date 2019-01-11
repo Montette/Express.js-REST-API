@@ -16,7 +16,12 @@ router.route('/signup')
 
 
 router.route('/login')
-    .post(userController.login)
+    .post(userController.login);
+
+
+    router.route('/forgot')
+        .post(userController.forgot)
+
 
 
 router.use((req, res, next) => {
@@ -31,7 +36,7 @@ router.use((req, res, next) => {
                 })
             };
 
-            req.decoded = decoded;
+            req.decoded = decoded; // this add the decoded payload to the client req (request) object
             next();
         })
     } else {

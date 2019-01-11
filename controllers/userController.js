@@ -1,5 +1,6 @@
 const User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
+const shortId = require('shortid');
 // const express = require('express');
 // const app = express();
 // const app = require('../index').app;
@@ -8,6 +9,7 @@ exports.signup = (req, res) => {
     const user = new User({
         login: req.body.login,
         password: req.body.password,
+        email: req.body.email,
         admin: req.body.isAdmin
     });
 
@@ -29,7 +31,7 @@ exports.signup = (req, res) => {
 exports.login = (req, res) => {
     
     User.findOne({
-        login: req.body.name
+        login: req.body.login
     }, (error, user) => {
         if(error) throw error;
 
@@ -62,5 +64,20 @@ exports.login = (req, res) => {
         }
 
   
+    })
+};
+
+exports.forgot = (req, res) => {
+    const email = req.body.email;
+    User.findOne({email}, (error, userData) => {
+        if(error) {
+            res.json({
+                success: false,
+                message: 'Email was not found',
+                token
+            })
+        };
+
+
     })
 }
