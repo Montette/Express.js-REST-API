@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const contactController = require('../controllers/contactController');
+const userController = require ('../controllers/userController');
+const jwt = require('jsonwebtoken');
 
 router.get('/', (req, res) => {
     res.json({
@@ -7,6 +9,39 @@ router.get('/', (req, res) => {
         message: 'Hello world!'
     });
 });
+
+router.route('/signup')
+    .post(userController.signup);
+
+
+
+router.route('/login')
+    .post(userController.login)
+
+
+router.use((req, res, next) => {
+    const token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+    if(token) {
+        jwt.verify(token, app.get('superSecret'), (error, decoded) => {
+            if (error) {
+                return res.json({
+                    success: false,
+                    message: 'Failed to authenticate token'
+                })
+            };
+
+            req.decoded = decoded;
+            next();
+        })
+    } else {
+        return res.json({
+            success: false,
+            message: 'No token provided'
+        })
+    }
+})
+
 
 router.route('/contacts')
     .get(contactController.get)
